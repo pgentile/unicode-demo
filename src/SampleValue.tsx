@@ -1,3 +1,4 @@
+import type {MouseEvent} from "react";
 import {useSource} from "./SourceContextBase.ts";
 
 export interface SampleValueProps {
@@ -7,7 +8,7 @@ export interface SampleValueProps {
 export default function SampleValue({sampleValue}: SampleValueProps) {
     const [, setSource] = useSource();
 
-    const onSampleDataClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const onSampleDataClick = (event: MouseEvent<HTMLAnchorElement>) => {
         event.preventDefault();
         setSource(sampleValue);
     }
