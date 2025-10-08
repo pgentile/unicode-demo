@@ -9,7 +9,7 @@ import Normalization from "./Normalization.tsx";
 export default function App() {
     return (
         <SourceContext>
-            <header>
+            <header className="global-header">
                 <h1>Unicode demo</h1>
             </header>
 

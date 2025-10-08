@@ -1,4 +1,5 @@
 import type {MouseEvent} from "react";
+
 import CodePointLink from "./CodePointLink.tsx";
 import {getCodePointAsHexa} from "./codePoints.ts";
 import {useSource} from "./SourceContextBase.ts";

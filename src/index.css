@@ -6,66 +6,138 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
 
 :root {
-    font-size: 1.3em;
+    --margin: 1rem;
 
-    margin: 2rem;
+    --background-color: white;
+    --color: black;
+
+    --header-background-color: purple;
+    --header-color: white;
+
+    --input-group-background-color: #4b4b4b;
+    --input-group-color: white;
+
+    --source-background-color: #4b4b4b;
+    --source-color: var(--color);
+
+    font-size: 1.3em;
+    font-family: 'Source Sans Pro', Roboto, "San Francisco", "Segoe UI", sans-serif;
+
+}
+
+* {
+    box-sizing: border-box;
 }
 
 html, body {
     margin: 0;
     padding: 0;
+
+    background-color: var(--background-color);
+    color: var(--color);
+}
+
+h1, h2, h3, h4, h5, h6, p, pre {
+    margin: 0;
+    margin-bottom: calc(var(--margin) * 0.75);
+
+    padding: 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 a, a:visited {
     color: blue;
 }
 
-.source-section {
-    .source-input {
-        font-size: 1.5rem;
+.global-header {
+    background-color: var(--header-background-color);
+    color: var(--header-color);
+    padding: calc(var(--margin) * 0.75);
+
+    h1 {
+        margin: 0;
+        font-size: 2.5rem;
     }
 }
 
-.samples {
-    .sample-value:not(:last-child)::after {
-        content: ", ";
+.input-group {
+    background-color: var(--input-group-background-color);
+    color: var(--input-group-color);
+    padding: calc(var(--margin) * 0.75);
+
+    a {
+        color: var(--input-group-color);
+    }
+
+    .source-section {
+        ;
+
+        .source-input {
+            font-size: 2.5rem;
+            display: block;
+            width: 100%;
+
+            border: none;
+            padding: calc(var(--margin) / 2);
+        }
+    }
+
+    .source-samples {
+        padding-top: calc(var(--margin) * 0.75);
+    }
+
+    .samples {
+
+        .sample-value a {
+            text-decoration: none;
+        }
+
+        .sample-value:not(:last-child)::after {
+            content: ", ";
+        }
     }
 }
 
-.output-title {
-    font-weight: bold;
-}
+.output {
+    padding: calc(var(--margin) * 0.75);
 
-.output-title .output-detailed-description {
-    font-weight: normal;
-    font-size: 0.8rem;
-}
+    .output-title {
+        font-weight: bold;
 
-.output-sequence {
-    font-family: monospace;
-    font-size: 0.8rem;
+        .output-detailed-description {
+            font-weight: normal;
+            font-size: 0.8rem;
+        }
+    }
+
+    .output-use-as-source {
+        margin-top: calc(var(--margin) * 0.75);
+    }
 }
 
 .code-point-display {
     display: flex;
     justify-content: flex-start;
-    gap: 0.5rem;
+    gap: calc(var(--margin) / 2);
 
     overflow-x: auto;
 
     .codepoint {
-        --margin: 0.25rem;
+        --inner-margin: calc(var(--margin) / 2.5);
+
+        padding: var(--inner-margin);
 
         display: flex;
         flex-direction: column;
         justify-content: space-between;
 
-        border: 1px dotted black;
-
-        padding: var(--margin);
+        border: 1px dotted var(--color);
 
         .codepoint-char {
-            margin-bottom: calc(var(--margin) * 2);
+            padding-bottom: var(--inner-margin);
         }
 
         .codepoint-char, .codepoint-value {
@@ -73,7 +145,7 @@ a, a:visited {
         }
 
         .codepoint-char-link {
-            color: black;
+            color: var(--color);
             text-decoration: none;
         }
 

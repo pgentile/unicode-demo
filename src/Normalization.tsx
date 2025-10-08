@@ -34,7 +34,7 @@ export default function Normalization({form}: NormalizationProps) {
             </h2>
             <Activity mode={normalized ? "visible" : "hidden"}>
                 <CodePointDisplay value={normalized}/>
-                <p>
+                <p className="output-use-as-source">
                     <a href="#" onClick={onUseNormalizedAsSourceClick}>Use it as source</a>
                 </p>
             </Activity>
