@@ -1,17 +1,24 @@
+import type {MouseEvent} from "react";
 import {getCodePointAsHexa} from "./codePoints.ts";
+import {useShowCodePoint} from "./CharacterContextBase.ts";
 
 export interface CodePointLinkProps {
     codePoint: number
 }
 
 export default function CodePointLink({codePoint}: CodePointLinkProps) {
+    const showCodePoint = useShowCodePoint();
+
     const codePointAsHexa = getCodePointAsHexa(codePoint);
     const codePointDescription = `U+${codePointAsHexa}`;
-    const codePointLink = `https://www.compart.com/en/unicode/${codePointDescription}`;
-    // const codePointLink = `https://symbl.cc/en/${codePointAsHexa}`;
+
+    const onShowCodePointClick = (event: MouseEvent<HTMLAnchorElement>) => {
+        event.preventDefault();
+        showCodePoint(codePoint);
+    };
 
     return (
-        <a href={codePointLink} target="_blank" rel="noopener">
+        <a href="#" onClick={onShowCodePointClick}>
             {codePointDescription}
         </a>
     );

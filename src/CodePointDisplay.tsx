@@ -8,8 +8,9 @@ export interface CodePointDisplay {
 export default function CodePointDisplay({value}: CodePointDisplay) {
     const codePoints = getCodePoints(value);
 
-    return (<div className="code-point-display">
-        {codePoints.map((codePoint, index) => <CodePoint key={index} codePoint={codePoint}/>)}
-    </div>);
-
+    return (
+        <div className="code-point-display">
+            {codePoints.map((codePoint, index) => <CodePoint key={index} codePoint={codePoint}/>)}
+        </div>
+    );
 }
