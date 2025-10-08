@@ -1,0 +1,84 @@
+/*
+
+ Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range
+ to set a different font per unicode range
+ */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap');
+
+:root {
+    font-size: 1.3em;
+
+    margin: 2rem;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+.source-section {
+    .source-input {
+        font-size: 1.5rem;
+    }
+}
+
+.samples {
+    .sample-value:not(:last-child)::after {
+        content: ", ";
+    }
+}
+
+.output-title {
+    font-weight: bold;
+}
+
+.output-title .output-detailed-description {
+    font-weight: normal;
+    font-size: 0.8rem;
+}
+
+.output-sequence {
+    font-family: monospace;
+    font-size: 0.8rem;
+}
+
+.code-point-display {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    overflow-x: auto;
+
+    .codepoint {
+        --margin: 0.25rem;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        border: 1px dotted black;
+
+        padding: var(--margin);
+
+        .codepoint-char {
+            margin-bottom: calc(var(--margin) * 2);
+        }
+
+        .codepoint-char, .codepoint-value {
+            text-align: center;
+        }
+
+    }
+}
+
+.hidden {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    height: 0 !important;
+    width: 0 !important;
+    overflow: hidden !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
