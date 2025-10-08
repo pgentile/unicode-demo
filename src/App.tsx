@@ -4,9 +4,10 @@ import SampleValueGroup from "./SampleValueGroup.tsx";
 import OriginDisplay from "./OriginDisplay.tsx";
 import NumberOfCodepoints from "./NumberOfCodepoints.tsx";
 import JsStringLength from "./JsStringLength.tsx";
-import Normalization from "./Normalization.tsx";
+import Normalization, {type NormalizationForm} from "./Normalization.tsx";
 
 export default function App() {
+    const normalizationForms: NormalizationForm[] = ["NFC", "NFD", "NFKC", "NFKD"];
     return (
         <SourceContext>
             <header className="global-header">
@@ -23,8 +24,8 @@ export default function App() {
                 <NumberOfCodepoints/>
                 <JsStringLength/>
 
-                {["NFC", "NFD", "NFKC", "NFKD"].map(form => (
-                    <Normalization key={form} form={form as "NFC" | "NFD" | "NFKC" | "NFKD"}/>
+                {normalizationForms.map(form => (
+                    <Normalization key={form} form={form as NormalizationForm}/>
                 ))}
             </section>
         </SourceContext>
