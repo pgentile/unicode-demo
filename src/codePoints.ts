@@ -56,29 +56,15 @@ function encodeToUtf8(codePoints: readonly number[]): number[][] {
 }
 
 function encodeToUtf16(codePoints: readonly number[]): number[][] {
-  type Utf16Word = [number, number]; // Two bytes
-  const sequences: Utf16Word[] = [];
+  const sequences: number[][] = [];
 
   for (const codePoint of codePoints) {
     if (codePoint <= 0xffff) {
-      const codePointBytes: Utf16Word = [
-        (codePoint >> 8) & 0xff,
-        codePoint & 0xff,
-      ];
-      sequences.push(codePointBytes);
+      sequences.push([codePoint]);
     } else {
       const highSurrogate = 0xd800 + ((codePoint - 0x10000) >>> 10);
       const lowSurrogate = 0xdc00 + ((codePoint - 0x10000) & 0b1111111111);
-
-      const highSurrogateBytes: Utf16Word = [
-        (highSurrogate >> 8) & 0xff,
-        highSurrogate & 0xff,
-      ];
-      const lowSurrogateBytes: Utf16Word = [
-        (lowSurrogate >> 8) & 0xff,
-        lowSurrogate & 0xff,
-      ];
-      sequences.push(highSurrogateBytes, lowSurrogateBytes);
+      sequences.push([highSurrogate, lowSurrogate]);
     }
   }
 
