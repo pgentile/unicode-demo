@@ -7,19 +7,30 @@ import ByteSequence from "./ByteSequence.tsx";
 
 const characterNamesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
-    async function loadCharacterNames() {
+    async function loadModule() {
       const module = await import("@unicode/unicode-17.0.0/Names");
       return module.default;
     }
 
-    loadCharacterNames().then(resolve, reject);
+    loadModule().then(resolve, reject);
+  },
+);
+
+const characterCategoriesPromise: Promise<Map<number, string>> = new Promise(
+  (resolve, reject) => {
+    async function loadModule() {
+      const module = await import("@unicode/unicode-17.0.0/General_Category");
+      return module.default;
+    }
+
+    loadModule().then(resolve, reject);
   },
 );
 
 export default function CharacterInfo() {
   const characterNames = use(characterNamesPromise);
-  const codePointOrNull = useCodePoint();
-  const codePoint = codePointOrNull ?? 0;
+  const characterCategories = use(characterCategoriesPromise);
+  const codePoint = useCodePoint() ?? 0;
   const [, setSource] = useSource();
 
   const onUseAsSourceClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -28,6 +39,7 @@ export default function CharacterInfo() {
   };
 
   const characterName = characterNames.get(codePoint);
+  const characterCategory = (characterCategories.get(codePoint) ?? "-").replaceAll("_", " ");
 
   const codePointAsHexa = getCodePointAsHexa(codePoint);
   const codePointDescription = `U+${codePointAsHexa}`;
@@ -43,8 +55,10 @@ export default function CharacterInfo() {
       </div>
 
       <h3>Character abstract name</h3>
-
       <p>{characterName}</p>
+
+      <h3>General category</h3>
+      <p>{characterCategory}</p>
 
       <h3>UTF-8 encoding</h3>
       <ByteSequence codePoints={[codePoint]} encoding="utf-8" />
