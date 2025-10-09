@@ -132,6 +132,31 @@ a:visited {
   color: var(--char-info-color);
 
   box-shadow: rgba(0, 0, 0, 0.5) -5px 0 10px;
+
+  .character-info-container-close {
+    --box-size: 1.5rem;
+
+    all: unset;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: var(--box-size);
+    height: var(--box-size);
+
+    padding: calc(var(--margin) / 4);
+    color: white;
+    background-color: black;
+
+    font-size: 1rem;
+    text-align: center;
+
+    cursor: pointer;
+
+    &:hover {
+      background-color: #676767;
+    }
+  }
 }
 
 .character-info {

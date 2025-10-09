@@ -1,11 +1,14 @@
-import { Activity, lazy, Suspense } from "react";
+import { Activity, lazy, Suspense, type MouseEvent } from "react";
 import SourceForm from "./SourceForm.tsx";
 import SampleValueGroup from "./SampleValueGroup.tsx";
 import OriginDisplay from "./OriginDisplay.tsx";
 import NumberOfCodepoints from "./NumberOfCodepoints.tsx";
 import JsStringLength from "./JsStringLength.tsx";
 import Normalization, { type NormalizationForm } from "./Normalization.tsx";
-import { useCodePointDisplay } from "./CharacterContextBase.ts";
+import {
+  useCodePointDisplay,
+  useHideCharacterContext,
+} from "./CharacterContextBase.ts";
 import EncodedBytes from "./EncodedBytes.tsx";
 import { createPortal } from "react-dom";
 
@@ -19,6 +22,14 @@ export default function App() {
     "NFKC",
     "NFKD",
   ];
+
+  const hideCharacterContext = useHideCharacterContext();
+
+  const onCharacterInfoCloseClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    hideCharacterContext();
+  };
+
   return (
     <>
       <header className="global-header">
@@ -34,6 +45,12 @@ export default function App() {
         <Activity mode={displayCodePoint ? "visible" : "hidden"}>
           {createPortal(
             <aside className="character-info-container">
+              <button
+                className="character-info-container-close"
+                onClick={onCharacterInfoCloseClick}
+              >
+                ╳<span className="hidden">Close character info</span>
+              </button>
               <Suspense fallback={"Loading character info..."}>
                 {displayCodePoint && <CharacterInfo />}
               </Suspense>

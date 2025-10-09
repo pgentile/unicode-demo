@@ -1,8 +1,5 @@
 import { type MouseEvent, use } from "react";
-import {
-  useCodePoint,
-  useHideCharacterContext,
-} from "./CharacterContextBase.ts";
+import { useCodePoint } from "./CharacterContextBase.ts";
 import CodePoint from "./CodePoint.tsx";
 import { getCodePointAsHexa } from "./codePoints.ts";
 import { useSource } from "./SourceContextBase.ts";
@@ -23,13 +20,7 @@ export default function CharacterInfo() {
   const characterNames = use(characterNamesPromise);
   const codePointOrNull = useCodePoint();
   const codePoint = codePointOrNull ?? 0;
-  const hide = useHideCharacterContext();
   const [, setSource] = useSource();
-
-  const onCloseClick = (event: MouseEvent<HTMLAnchorElement>) => {
-    event.preventDefault();
-    hide();
-  };
 
   const onUseAsSourceClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
@@ -72,11 +63,6 @@ export default function CharacterInfo() {
       <p>
         <a href="#" onClick={onUseAsSourceClick}>
           Use character as source
-        </a>
-      </p>
-      <p>
-        <a href="#" onClick={onCloseClick}>
-          Close character info
         </a>
       </p>
     </div>
