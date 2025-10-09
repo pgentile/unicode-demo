@@ -1,10 +1,3 @@
-/*
-
- Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/unicode-range
- to set a different font per unicode range
- */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap");
-
 :root {
   --margin: 1rem;
 
