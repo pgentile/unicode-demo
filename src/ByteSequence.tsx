@@ -10,7 +10,8 @@ export default function ByteSequence({
   encoding,
 }: ByteSequenceProps) {
   const sequence = encodeTo(codePoints, encoding);
-  const padding = encoding === "utf-16" ? 4 : 2;
+
+  const padding = getPadding(encoding);
 
   return (
     <div className="unicode-sequence">
@@ -23,10 +24,25 @@ export default function ByteSequence({
   );
 }
 
-function byteToHex(n: number, padding: number): string {
+type Padding = 2 | 4 | 8;
+
+function getPadding(encoding: Encoding): Padding {
+  switch (encoding) {
+    case "utf-8":
+      return 2;
+    case "utf-16":
+      return 4;
+    case "utf-32":
+      return 8;
+    default:
+      throw new Error(`Unknown encoding: ${encoding}`);
+  }
+}
+
+function byteToHex(n: number, padding: Padding): string {
   return "0x" + n.toString(16).toUpperCase().padStart(padding, "0");
 }
 
-function bytesToHex(bytes: number[], padding: number): string {
+function bytesToHex(bytes: number[], padding: Padding): string {
   return bytes.map((b) => byteToHex(b, padding)).join(" ");
 }

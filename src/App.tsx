@@ -48,6 +48,7 @@ export default function App() {
           <JsStringLength />
           <EncodedBytes encoding="utf-8" />
           <EncodedBytes encoding="utf-16" />
+          <EncodedBytes encoding="utf-32" />
 
           {normalizationForms.map((form) => (
             <Normalization key={form} form={form as NormalizationForm} />

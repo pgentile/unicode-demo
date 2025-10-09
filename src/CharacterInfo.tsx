@@ -61,6 +61,9 @@ export default function CharacterInfo() {
       <h3>UTF-16 encoding</h3>
       <ByteSequence codePoints={[codePoint]} encoding="utf-16" />
 
+      <h3>UTF-32 encoding</h3>
+      <ByteSequence codePoints={[codePoint]} encoding="utf-32" />
+
       <p>
         <a href={codePointLink} rel="noopener" target="_blank">
           View more info on compart.com

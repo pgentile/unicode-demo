@@ -21,7 +21,7 @@ export function getCodePointAsHexa(codePoint: number): string {
   return codePoint.toString(16).padStart(4, "0").toUpperCase();
 }
 
-export type Encoding = "utf-8" | "utf-16";
+export type Encoding = "utf-8" | "utf-16" | "utf-32";
 
 export function encodeTo(
   codePoints: readonly number[],
@@ -32,6 +32,8 @@ export function encodeTo(
       return encodeToUtf8(codePoints);
     case "utf-16":
       return encodeToUtf16(codePoints);
+    case "utf-32":
+      return encodeToUtf32(codePoints);
     default:
       throw new Error(`Unknown encoding: ${encoding}`);
   }
@@ -69,4 +71,8 @@ function encodeToUtf16(codePoints: readonly number[]): number[][] {
   }
 
   return sequences;
+}
+
+function encodeToUtf32(codePoints: readonly number[]): number[][] {
+  return codePoints.map((cp) => [cp]);
 }
