@@ -1,19 +1,20 @@
-import {type ReactNode, useState} from "react";
+import { type ReactNode, useState } from "react";
 
-import {SourceContextValue, SourceContextActions} from "./SourceContextBase.ts";
+import {
+  SourceContextValue,
+  SourceContextActions,
+} from "./SourceContextBase.ts";
 
 export interface SourceContextProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-export default function SourceContext({children}: SourceContextProps) {
-    const [source, setSource] = useState("");
+export default function SourceContext({ children }: SourceContextProps) {
+  const [source, setSource] = useState("");
 
-    return (
-        <SourceContextValue value={source}>
-            <SourceContextActions value={setSource}>
-                {children}
-            </SourceContextActions>
-        </SourceContextValue>
-    );
+  return (
+    <SourceContextValue value={source}>
+      <SourceContextActions value={setSource}>{children}</SourceContextActions>
+    </SourceContextValue>
+  );
 }

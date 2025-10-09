@@ -1,42 +1,45 @@
 import {
-    CharacterContextActions,
-    CharacterContextValue,
-    type CharacterContextValueProps,
-    type CharacterContextActionsProps
+  CharacterContextActions,
+  CharacterContextValue,
+  type CharacterContextValueProps,
+  type CharacterContextActionsProps,
 } from "./CharacterContextBase.ts";
-import {type ReactNode, useState} from "react";
+import { type ReactNode, useState } from "react";
 
 export interface CharacterContextProps {
-    children: ReactNode
+  children: ReactNode;
 }
 
-export default function CharacterContext({children}: CharacterContextProps) {
-    const [characterContextProps, setCharacterContextProps] = useState<CharacterContextValueProps>({
-        display: false,
+export default function CharacterContext({ children }: CharacterContextProps) {
+  const [characterContextProps, setCharacterContextProps] =
+    useState<CharacterContextValueProps>({
+      display: false,
     });
 
-    function hide() {
-        setCharacterContextProps(currentState => ({
-            ...currentState,
-            display: false
-        }));
-    }
+  function hide() {
+    setCharacterContextProps((currentState) => ({
+      ...currentState,
+      display: false,
+    }));
+  }
 
-    function showCodePoint(codePoint: number) {
-        setCharacterContextProps({
-            display: true,
-            codePoint
-        });
-    }
+  function showCodePoint(codePoint: number) {
+    setCharacterContextProps({
+      display: true,
+      codePoint,
+    });
+  }
 
-    const actions: CharacterContextActionsProps = {
-        hide,
-        showCodePoint
-    };
+  const actions: CharacterContextActionsProps = {
+    hide,
+    showCodePoint,
+  };
 
-    return <CharacterContextValue value={characterContextProps}>
-        <CharacterContextActions value={actions}>
-            {children}
-        </CharacterContextActions>
-    </CharacterContextValue>;
+  return (
+    <CharacterContextValue value={characterContextProps}>
+      <CharacterContextActions value={actions}>
+        {children}
+      </CharacterContextActions>
+    </CharacterContextValue>
+  );
 }
