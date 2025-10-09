@@ -1,8 +1,12 @@
+import {encodeTo, type Encoding} from "./codePoints.ts";
+
 export interface ByteSequenceProps {
-    sequence: number[][];
+    codePoints: number[];
+    encoding: Encoding
 }
 
-export default function ByteSequence({sequence}: ByteSequenceProps) {
+export default function ByteSequence({codePoints, encoding}: ByteSequenceProps) {
+    const sequence = encodeTo(codePoints, encoding);
     return (
         <div className="unicode-sequence">
             {sequence.map((bytes, index) => <span key={index} className="unicode-bytes">{bytesToHex(bytes)}</span>)}

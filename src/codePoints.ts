@@ -23,7 +23,7 @@ export function getCodePointAsHexa(codePoint: number): string {
 
 export type Encoding = "utf-8" | "utf-16";
 
-export function encodeTo(codePoints: number[], encoding: Encoding): number[][] {
+export function encodeTo(codePoints: readonly number[], encoding: Encoding): number[][] {
     switch (encoding) {
         case "utf-8":
             return encodeToUtf8(codePoints);
@@ -34,7 +34,7 @@ export function encodeTo(codePoints: number[], encoding: Encoding): number[][] {
     }
 }
 
-function encodeToUtf8(codePoints: number[]): number[][] {
+function encodeToUtf8(codePoints: readonly number[]): number[][] {
     const sequences: number[][] = [];
 
     const textEncoder = new TextEncoder();
@@ -50,30 +50,23 @@ function encodeToUtf8(codePoints: number[]): number[][] {
     return sequences;
 }
 
-function encodeToUtf16(codePoints: number[]): number[][] {
-    const sequences: number[][] = [];
+function encodeToUtf16(codePoints: readonly number[]): number[][] {
+    type Utf16Word = [number, number]; // Two bytes
+    const sequences: Utf16Word[] = [];
 
     for (const codePoint of codePoints) {
-        const codePointBytes: number[] = [];
-
         if (codePoint <= 0xFFFF) {
-            codePointBytes.push((codePoint >> 8) & 0xFF, codePoint & 0xFF);
+            const codePointBytes: Utf16Word = [(codePoint >> 8) & 0xFF, codePoint & 0xFF];
+            sequences.push(codePointBytes);
         } else {
             const highSurrogate = 0xD800 + ((codePoint - 0x10000) >>> 10);
             const lowSurrogate = 0xDC00 + ((codePoint - 0x10000) & 0b1111111111);
-            codePoints.push(
-                (highSurrogate >> 8) & 0xFF,
-                highSurrogate & 0xFF,
-                (lowSurrogate >> 8) & 0xFF,
-                lowSurrogate & 0xFF
-            );
+
+            const highSurrogateBytes: Utf16Word = [(highSurrogate >> 8) & 0xFF, highSurrogate & 0xFF];
+            const lowSurrogateBytes: Utf16Word = [(lowSurrogate >> 8) & 0xFF, lowSurrogate & 0xFF];
+            sequences.push(highSurrogateBytes, lowSurrogateBytes);
         }
-
-        sequences.push(codePointBytes);
     }
-
-    console.info("Got this code points:", codePoints);
-    console.info("  > Got this output sequence:", sequences);
 
     return sequences;
 }
