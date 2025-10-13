@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@unicode/unicode-17.0.0':
-        specifier: ^1.6.12
-        version: 1.6.12
+        specifier: ^1.6.14
+        version: 1.6.14
       react:
         specifier: ^19.2.0
         version: 19.2.0
@@ -609,8 +609,8 @@ packages:
     resolution: {integrity: sha512-FrvMpAK+hTbFy7vH5j1+tMYHMSKLE6RzluFJlkFNKD0p9YsUT75JlBSmr5so3QRzvMwU5/bIEdeNrxm8du8l3Q==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
 
-  '@unicode/unicode-17.0.0@1.6.12':
-    resolution: {integrity: sha512-4IyVjMPIjHThNGZ3PSv7CTtkHrTF8YlkA2HuNAMrqnjIiN2ghCtnwUwEqjfpUT+dfBWjiZJGkiInlqF/3fPiZQ==}
+  '@unicode/unicode-17.0.0@1.6.14':
+    resolution: {integrity: sha512-1DE4uCZNdOJhoZEtOac7k3tqwm3FrG4s1L+1BFmzuFN39vPiqYZdRwaK9XmpwFTxdQK6AFYJ49bWqEzvLiEw1g==}
 
   '@vitejs/plugin-react@5.0.4':
     resolution: {integrity: sha512-La0KD0vGkVkSk6K+piWDKRUyg8Rl5iAIKRMH0vMJI0Eg47bq1eOxmoObAaQG37WMW9MSyk7Cs8EIWwJC1PtzKA==}
@@ -2130,7 +2130,7 @@ snapshots:
       '@typescript-eslint/types': 8.46.0
       eslint-visitor-keys: 4.2.1
 
-  '@unicode/unicode-17.0.0@1.6.12': {}
+  '@unicode/unicode-17.0.0@1.6.14': {}
 
   '@vitejs/plugin-react@5.0.4(vite@7.1.9(@types/node@24.7.2))':
     dependencies:
