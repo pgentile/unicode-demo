@@ -1,6 +1,7 @@
 import { useSource } from "./SourceContextBase.ts";
-import { getCodePoints, type Encoding } from "./codePoints.ts";
+import { getCodePoints } from "./codePoints.ts";
 import ByteSequence from "./ByteSequence.tsx";
+import type { Encoding } from "./common.ts";
 
 export interface EncodedBytesProps {
   encoding: Encoding;

@@ -4,12 +4,15 @@ import "./index.css";
 import App from "./App.tsx";
 import CharacterContext from "./CharacterContext.tsx";
 import SourceContext from "./SourceContext.tsx";
+import DemoModeContext from "./DemoModeContext.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <CharacterContext>
       <SourceContext>
-        <App />
+        <DemoModeContext>
+          <App />
+        </DemoModeContext>
       </SourceContext>
     </CharacterContext>
   </StrictMode>,

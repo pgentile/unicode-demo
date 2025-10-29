@@ -39,7 +39,9 @@ export default function CharacterInfo() {
   };
 
   const characterName = characterNames.get(codePoint);
-  const characterCategory = (characterCategories.get(codePoint) ?? "-").replaceAll("_", " ");
+  const characterCategory = (
+    characterCategories.get(codePoint) ?? "-"
+  ).replaceAll("_", " ");
 
   const codePointAsHexa = getCodePointAsHexa(codePoint);
   const codePointDescription = `U+${codePointAsHexa}`;

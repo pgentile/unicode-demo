@@ -1,3 +1,5 @@
+import type { Encoding } from "./common.ts";
+
 export function getCodePoints(str: string): number[] {
   const codePoints: number[] = [];
 
@@ -20,8 +22,6 @@ export function countCodePoints(str: string): number {
 export function getCodePointAsHexa(codePoint: number): string {
   return codePoint.toString(16).padStart(4, "0").toUpperCase();
 }
-
-export type Encoding = "utf-8" | "utf-16" | "utf-32";
 
 export function encodeTo(
   codePoints: readonly number[],

@@ -1,4 +1,5 @@
-import { encodeTo, type Encoding } from "./codePoints.ts";
+import { encodeTo } from "./codePoints.ts";
+import type { Encoding } from "./common.ts";
 
 export interface ByteSequenceProps {
   codePoints: number[];

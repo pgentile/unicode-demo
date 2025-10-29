@@ -11,6 +11,9 @@ import {
 } from "./CharacterContextBase.ts";
 import EncodedBytes from "./EncodedBytes.tsx";
 import { createPortal } from "react-dom";
+import DemoControls from "./DemoControls.tsx";
+import { useDemoModeProps } from "./DemoModeContextBase.ts";
+import { ALL_ENCODINGS } from "./common.ts";
 
 const CharacterInfo = lazy(() => import("./CharacterInfo.tsx"));
 
@@ -22,6 +25,9 @@ export default function App() {
     "NFKC",
     "NFKD",
   ];
+
+  const { enabledEncodings, showJsString, showNormalizationForms, showOrigin } =
+    useDemoModeProps();
 
   const hideCharacterContext = useHideCharacterContext();
 
@@ -41,6 +47,7 @@ export default function App() {
           <SourceForm />
           <SampleValueGroup />
         </div>
+        <DemoControls />
 
         <Activity mode={displayCodePoint ? "visible" : "hidden"}>
           {createPortal(
@@ -60,16 +67,28 @@ export default function App() {
         </Activity>
 
         <div className="output-group">
-          <OriginDisplay />
-          <NumberOfCodepoints />
-          <JsStringLength />
-          <EncodedBytes encoding="utf-8" />
-          <EncodedBytes encoding="utf-16" />
-          <EncodedBytes encoding="utf-32" />
+          <Activity mode={showOrigin ? "visible" : "hidden"}>
+            <OriginDisplay />
+            <NumberOfCodepoints />
+          </Activity>
 
-          {normalizationForms.map((form) => (
-            <Normalization key={form} form={form as NormalizationForm} />
+          <Activity mode={showJsString ? "visible" : "hidden"}>
+            <JsStringLength />
+          </Activity>
+
+          {ALL_ENCODINGS.map((encoding) => (
+            <Activity
+              mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
+            >
+              <EncodedBytes key={encoding} encoding={encoding} />
+            </Activity>
           ))}
+
+          <Activity mode={showNormalizationForms ? "visible" : "hidden"}>
+            {normalizationForms.map((form) => (
+              <Normalization key={form} form={form as NormalizationForm} />
+            ))}
+          </Activity>
         </div>
       </main>
     </>
