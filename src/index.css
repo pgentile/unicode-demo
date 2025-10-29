@@ -144,6 +144,8 @@ a:visited {
   top: 0;
   height: 100vh;
 
+  overflow-y: auto;
+
   z-index: 1000;
 
   background-color: var(--char-info-background-color);
