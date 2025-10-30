@@ -11,6 +11,8 @@ export default function SampleValueGroup() {
     "🇺🇸",
     "é",
     "é",
+    "👍",
+    "👍🏽",
     "Ǚ",
     "𝕭𝖔𝖔𝖒",
     "œ",
