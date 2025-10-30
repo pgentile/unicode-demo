@@ -30,6 +30,7 @@ export default function SampleValueGroup() {
     "ﬁ",
     "Україна",
     "불",
+    "불",
     "자모",
     "㍍㌔㌢",
     "が",
