@@ -1,9 +1,11 @@
-import { type MouseEvent, use } from "react";
+import { Activity, type MouseEvent, use } from "react";
 import { useCodePoint } from "./CharacterContextBase.ts";
 import CodePoint from "./CodePoint.tsx";
 import { getCodePointAsHexa } from "./codePoints.ts";
 import { useSource } from "./SourceContextBase.ts";
 import ByteSequence from "./ByteSequence.tsx";
+import { useDemoModeProps } from "./DemoModeContextBase.ts";
+import { ALL_ENCODINGS } from "./common.ts";
 
 const characterNamesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
@@ -48,6 +50,8 @@ export default function CharacterInfo() {
   const codePointLink = `https://www.compart.com/en/unicode/${codePointDescription}`;
   // const codePointLink = `https://symbl.cc/en/${codePointAsHexa}`;
 
+  const { enabledEncodings } = useDemoModeProps();
+
   return (
     <div className="character-info">
       <h2>About the character</h2>
@@ -62,14 +66,15 @@ export default function CharacterInfo() {
       <h3>General category</h3>
       <p>{characterCategory}</p>
 
-      <h3>UTF-8 encoding</h3>
-      <ByteSequence codePoints={[codePoint]} encoding="utf-8" />
-
-      <h3>UTF-16 encoding</h3>
-      <ByteSequence codePoints={[codePoint]} encoding="utf-16" />
-
-      <h3>UTF-32 encoding</h3>
-      <ByteSequence codePoints={[codePoint]} encoding="utf-32" />
+      {ALL_ENCODINGS.map((encoding) => (
+        <Activity
+          key={encoding}
+          mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
+        >
+          <h3>{encoding.toUpperCase()} encoding</h3>
+          <ByteSequence codePoints={[codePoint]} encoding={encoding} />
+        </Activity>
+      ))}
 
       <p>
         <a href={codePointLink} rel="noopener" target="_blank">
