@@ -182,14 +182,14 @@ a:visited {
 .character-info {
   padding: calc(var(--margin) * 0.75);
 
+    @media (max-width: 800px) {
+        min-width: 20rem;
+        max-width: 75vw;
+    }
+
   @media (min-width: 800px) {
     min-width: 25rem;
     max-width: 50vw;
-  }
-
-  @media (max-width: 800px) {
-    min-width: 20rem;
-    max-width: 75vw;
   }
 
   display: flex;

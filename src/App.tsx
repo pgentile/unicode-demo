@@ -78,6 +78,7 @@ export default function App() {
 
           {ALL_ENCODINGS.map((encoding) => (
             <Activity
+              key={encoding}
               mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
             >
               <EncodedBytes key={encoding} encoding={encoding} />
