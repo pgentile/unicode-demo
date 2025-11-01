@@ -28,11 +28,11 @@ export function encodeTo(
   encoding: Encoding,
 ): number[][] {
   switch (encoding) {
-    case "utf-8":
+    case "UTF-8":
       return encodeToUtf8(codePoints);
-    case "utf-16":
+    case "UTF-16":
       return encodeToUtf16(codePoints);
-    case "utf-32":
+    case "UTF-32":
       return encodeToUtf32(codePoints);
     default:
       throw new Error(`Unknown encoding: ${encoding}`);

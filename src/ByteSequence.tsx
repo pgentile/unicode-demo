@@ -29,11 +29,11 @@ type Padding = 2 | 4 | 8;
 
 function getPadding(encoding: Encoding): Padding {
   switch (encoding) {
-    case "utf-8":
+    case "UTF-8":
       return 2;
-    case "utf-16":
+    case "UTF-16":
       return 4;
-    case "utf-32":
+    case "UTF-32":
       return 8;
     default:
       throw new Error(`Unknown encoding: ${encoding}`);

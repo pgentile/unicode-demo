@@ -23,6 +23,7 @@ export default function DemoControls() {
           <label>
             <input
               type="checkbox"
+              name="origin"
               checked={showOrigin}
               onChange={() => toggleOrigin()}
             />{" "}
@@ -33,6 +34,7 @@ export default function DemoControls() {
           <label>
             <input
               type="checkbox"
+              name="js-string"
               checked={showJsString}
               onChange={() => toggleJsString()}
             />{" "}
@@ -47,10 +49,11 @@ export default function DemoControls() {
               <label>
                 <input
                   type="checkbox"
+                  name={"encoding-" + encoding}
                   checked={enabledEncodings.includes(encoding)}
                   onChange={() => toggleEncoding(encoding)}
                 />{" "}
-                {encoding.toUpperCase()}
+                {encoding}
               </label>
             </Fragment>
           ))}
@@ -59,6 +62,7 @@ export default function DemoControls() {
           <label>
             <input
               type="checkbox"
+              name="normalization-forms"
               checked={showNormalizationForms}
               onChange={() => toggleNormalizationForms()}
             />{" "}

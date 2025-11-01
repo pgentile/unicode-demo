@@ -121,7 +121,7 @@ export default function CharacterInfo() {
           key={encoding}
           mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
         >
-          <h3>{encoding.toUpperCase()} encoding</h3>
+          <h3>{encoding} encoding</h3>
           <ByteSequence codePoints={[codePoint]} encoding={encoding} />
         </Activity>
       ))}

@@ -4,7 +4,7 @@ import SampleValueGroup from "./SampleValueGroup.tsx";
 import OriginDisplay from "./OriginDisplay.tsx";
 import NumberOfCodepoints from "./NumberOfCodepoints.tsx";
 import JsStringLength from "./JsStringLength.tsx";
-import Normalization, { type NormalizationForm } from "./Normalization.tsx";
+import Normalization from "./Normalization.tsx";
 import {
   useCodePointDisplay,
   useHideCharacterContext,
@@ -13,18 +13,16 @@ import EncodedBytes from "./EncodedBytes.tsx";
 import { createPortal } from "react-dom";
 import DemoControls from "./DemoControls.tsx";
 import { useDemoModeProps } from "./DemoModeContextBase.ts";
-import { ALL_ENCODINGS } from "./common.ts";
+import {
+  ALL_ENCODINGS,
+  ALL_NORMALIZATION_FORMS,
+  type NormalizationForm,
+} from "./common.ts";
 
 const CharacterInfo = lazy(() => import("./CharacterInfo.tsx"));
 
 export default function App() {
   const displayCodePoint = useCodePointDisplay();
-  const normalizationForms: NormalizationForm[] = [
-    "NFC",
-    "NFD",
-    "NFKC",
-    "NFKD",
-  ];
 
   const { enabledEncodings, showJsString, showNormalizationForms, showOrigin } =
     useDemoModeProps();
@@ -86,7 +84,7 @@ export default function App() {
           ))}
 
           <Activity mode={showNormalizationForms ? "visible" : "hidden"}>
-            {normalizationForms.map((form) => (
+            {ALL_NORMALIZATION_FORMS.map((form) => (
               <Normalization key={form} form={form as NormalizationForm} />
             ))}
           </Activity>

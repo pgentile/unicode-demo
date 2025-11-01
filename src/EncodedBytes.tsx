@@ -14,7 +14,7 @@ export default function EncodedBytes({ encoding }: EncodedBytesProps) {
 
   return (
     <section className="output">
-      <h2 className="output-title">{encoding.toUpperCase()} encoded</h2>
+      <h2 className="output-title">{encoding} encoded</h2>
       <ByteSequence codePoints={codePoints} encoding={encoding} />
     </section>
   );

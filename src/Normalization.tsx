@@ -1,8 +1,7 @@
 import { Activity, type MouseEvent } from "react";
 import { useSource } from "./SourceContextBase.ts";
 import CodePointDisplay from "./CodePointDisplay.tsx";
-
-export type NormalizationForm = "NFC" | "NFD" | "NFKC" | "NFKD";
+import type { NormalizationForm } from "./common.ts";
 
 export interface NormalizationProps {
   form: NormalizationForm;
