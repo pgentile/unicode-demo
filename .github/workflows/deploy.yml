@@ -19,7 +19,8 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: "22"
+          node-version: "lts/*"
+          cache: "pnpm"
 
       - name: Install pnpm
         uses: pnpm/action-setup@v4
@@ -53,7 +54,9 @@ jobs:
     if: |
       github.ref == 'refs/heads/main'
 
-    concurrency: deploy-github-pages-${{ github.ref }}
+    concurrency:
+      group: deploy-github-pages-${{ github.ref }}
+      cancel-in-progress: true
 
     environment:
       name: github-pages
