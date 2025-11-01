@@ -13,6 +13,7 @@ export default function SampleValueGroup() {
     "é",
     "👍",
     "👍🏽",
+    "Hello Tech Day",
     "Ǚ",
     "𝕭𝖔𝖔𝖒",
     "œ",
@@ -39,6 +40,7 @@ export default function SampleValueGroup() {
     "が",
     "ئ",
     "בּ",
+    "𓀃",
   ];
 
   return (
