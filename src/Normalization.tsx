@@ -1,7 +1,7 @@
-import { Activity, type MouseEvent } from "react";
+import { type MouseEvent } from "react";
 import { useSource } from "./SourceContextBase.ts";
-import CodePointDisplay from "./CodePointDisplay.tsx";
 import type { NormalizationForm } from "./common.ts";
+import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 
 export interface NormalizationProps {
   form: NormalizationForm;
@@ -33,14 +33,12 @@ export default function Normalization({ form }: NormalizationProps) {
           <span className="hidden">—</span> {FORM_DESCRIPTIONS[form]}
         </span>
       </h2>
-      <Activity mode={normalized ? "visible" : "hidden"}>
-        <CodePointDisplay value={normalized} />
-        <p className="output-use-as-source">
-          <a href="#" onClick={onUseNormalizedAsSourceClick}>
-            Use it as source
-          </a>
-        </p>
-      </Activity>
+      <StringCodePointDisplay value={normalized} />
+      <p className="output-use-as-source">
+        <a href="#" onClick={onUseNormalizedAsSourceClick}>
+          Use it as source
+        </a>
+      </p>
     </section>
   );
 }

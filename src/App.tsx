@@ -1,8 +1,7 @@
-import { Activity, lazy, Suspense, type MouseEvent } from "react";
+import { Activity, lazy, Suspense, type MouseEvent, Fragment } from "react";
 import SourceForm from "./SourceForm.tsx";
 import SampleValueGroup from "./SampleValueGroup.tsx";
 import OriginDisplay from "./OriginDisplay.tsx";
-import NumberOfCodepoints from "./NumberOfCodepoints.tsx";
 import JsStringLength from "./JsStringLength.tsx";
 import Normalization from "./Normalization.tsx";
 import {
@@ -65,29 +64,21 @@ export default function App() {
         </Activity>
 
         <div className="output-group">
-          <Activity mode={showOrigin ? "visible" : "hidden"}>
-            <OriginDisplay />
-            <NumberOfCodepoints />
-          </Activity>
+          {showOrigin && <OriginDisplay />}
+          {showJsString && <JsStringLength />}
 
-          <Activity mode={showJsString ? "visible" : "hidden"}>
-            <JsStringLength />
-          </Activity>
-
-          {ALL_ENCODINGS.map((encoding) => (
-            <Activity
-              key={encoding}
-              mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
-            >
+          {ALL_ENCODINGS.filter((encoding) =>
+            enabledEncodings.includes(encoding),
+          ).map((encoding) => (
+            <Fragment key={encoding}>
               <EncodedBytes key={encoding} encoding={encoding} />
-            </Activity>
+            </Fragment>
           ))}
 
-          <Activity mode={showNormalizationForms ? "visible" : "hidden"}>
-            {ALL_NORMALIZATION_FORMS.map((form) => (
+          {showNormalizationForms &&
+            ALL_NORMALIZATION_FORMS.map((form) => (
               <Normalization key={form} form={form as NormalizationForm} />
             ))}
-          </Activity>
         </div>
       </main>
     </>

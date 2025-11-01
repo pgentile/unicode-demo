@@ -1,5 +1,6 @@
 import { useSource } from "./SourceContextBase.ts";
-import CodePointDisplay from "./CodePointDisplay.tsx";
+import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
+import { countCodePoints } from "./codePoints.ts";
 
 export default function OriginDisplay() {
   const [source] = useSource();
@@ -7,7 +8,10 @@ export default function OriginDisplay() {
   return (
     <section className="output">
       <h2 className="output-title">Origin</h2>
-      <CodePointDisplay value={source} />
+      <StringCodePointDisplay value={source} />
+      <p className="number-of-codepoints">
+        <b>Number of codepoints:</b> {countCodePoints(source)}
+      </p>
     </section>
   );
 }

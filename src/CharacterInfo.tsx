@@ -1,4 +1,4 @@
-import { Activity, type MouseEvent, use } from "react";
+import { Fragment, type MouseEvent, use } from "react";
 import { useCodePoint } from "./CharacterContextBase.ts";
 import { getCodePointAsHexa } from "./codePoints.ts";
 import { useSource } from "./SourceContextBase.ts";
@@ -6,6 +6,7 @@ import ByteSequence from "./ByteSequence.tsx";
 import { useDemoModeProps } from "./DemoModeContextBase.ts";
 import { ALL_ENCODINGS } from "./common.ts";
 import CodePointDisplay from "./CodePointDisplay.tsx";
+import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 
 const characterNamesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
@@ -66,12 +67,26 @@ const uppercaseMappingPromise: Promise<Map<number, number>> = new Promise(
   },
 );
 
+const mirroringGlyphsPromise: Promise<Map<number, string>> = new Promise(
+  (resolve, reject) => {
+    async function loadModule() {
+      const module = await import(
+        "@unicode/unicode-17.0.0/Bidi_Mirroring_Glyph"
+      );
+      return module.default;
+    }
+
+    loadModule().then(resolve, reject);
+  },
+);
+
 export default function CharacterInfo() {
   const characterNames = use(characterNamesPromise);
   const characterCategories = use(characterCategoriesPromise);
   const bidiClasses = use(bidiClassesPromise);
   const lowercaseMapping = use(lowercaseMappingPromise);
   const uppercaseMapping = use(uppercaseMappingPromise);
+  const mirroringGlyphs = use(mirroringGlyphsPromise);
 
   const codePoint = useCodePoint() ?? 0;
   const [, setSource] = useSource();
@@ -97,6 +112,8 @@ export default function CharacterInfo() {
   const lowerCaseCodePoint = lowercaseMapping.get(codePoint);
   const upperCaseCodePoint = uppercaseMapping.get(codePoint);
 
+  const mirroringGlyph = mirroringGlyphs.get(codePoint);
+
   const { enabledEncodings } = useDemoModeProps();
 
   return (
@@ -116,14 +133,13 @@ export default function CharacterInfo() {
       <h3>Bidi class</h3>
       <p>{bidiClass}</p>
 
-      {ALL_ENCODINGS.map((encoding) => (
-        <Activity
-          key={encoding}
-          mode={enabledEncodings.includes(encoding) ? "visible" : "hidden"}
-        >
+      {ALL_ENCODINGS.filter((encoding) =>
+        enabledEncodings.includes(encoding),
+      ).map((encoding) => (
+        <Fragment key={encoding}>
           <h3>{encoding} encoding</h3>
           <ByteSequence codePoints={[codePoint]} encoding={encoding} />
-        </Activity>
+        </Fragment>
       ))}
 
       {lowerCaseCodePoint && (
@@ -137,6 +153,13 @@ export default function CharacterInfo() {
         <>
           <h3>Uppercase mapping</h3>
           <CodePointDisplay codePoints={[upperCaseCodePoint]} />
+        </>
+      )}
+
+      {mirroringGlyph && (
+        <>
+          <h3>Mirroring character</h3>
+          <StringCodePointDisplay value={mirroringGlyph} />
         </>
       )}
 

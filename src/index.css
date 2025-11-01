@@ -150,6 +150,10 @@ a:visited {
   .output-use-as-source {
     margin-top: calc(var(--margin) * 0.75);
   }
+
+  .number-of-codepoints {
+    margin-top: calc(var(--margin) * 0.75);
+  }
 }
 
 .character-info-container {
@@ -194,7 +198,9 @@ a:visited {
 }
 
 .character-info {
-  padding: calc(var(--margin) * 0.75);
+  --ci-margin: calc(var(--margin) * 0.75);
+
+  padding: var(--ci-margin);
 
   @media (max-width: 800px) {
     min-width: 20rem;
@@ -218,11 +224,15 @@ a:visited {
   .character-info-codepoint {
     font-size: 1.5rem;
 
-    margin-bottom: calc(var(--margin) * 0.75);
+    margin-bottom: var(--ci-margin);
   }
 
   .unicode-sequence {
-    margin-bottom: calc(var(--margin) * 0.75);
+    margin-bottom: var(--ci-margin);
+  }
+
+  .code-point-display {
+    margin-bottom: var(--ci-margin);
   }
 }
 
