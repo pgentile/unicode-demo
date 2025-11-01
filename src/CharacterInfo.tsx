@@ -1,11 +1,11 @@
 import { Activity, type MouseEvent, use } from "react";
 import { useCodePoint } from "./CharacterContextBase.ts";
-import CodePoint from "./CodePoint.tsx";
 import { getCodePointAsHexa } from "./codePoints.ts";
 import { useSource } from "./SourceContextBase.ts";
 import ByteSequence from "./ByteSequence.tsx";
 import { useDemoModeProps } from "./DemoModeContextBase.ts";
 import { ALL_ENCODINGS } from "./common.ts";
+import CodePointDisplay from "./CodePointDisplay.tsx";
 
 const characterNamesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
@@ -29,9 +29,21 @@ const characterCategoriesPromise: Promise<Map<number, string>> = new Promise(
   },
 );
 
+const bidiClassesPromise: Promise<Map<number, string>> = new Promise(
+  (resolve, reject) => {
+    async function loadModule() {
+      const module = await import("@unicode/unicode-17.0.0/Bidi_Class");
+      return module.default;
+    }
+
+    loadModule().then(resolve, reject);
+  },
+);
+
 export default function CharacterInfo() {
   const characterNames = use(characterNamesPromise);
   const characterCategories = use(characterCategoriesPromise);
+  const bidiClasses = use(bidiClassesPromise);
   const codePoint = useCodePoint() ?? 0;
   const [, setSource] = useSource();
 
@@ -41,9 +53,12 @@ export default function CharacterInfo() {
   };
 
   const characterName = characterNames.get(codePoint);
+
   const characterCategory = (
     characterCategories.get(codePoint) ?? "-"
   ).replaceAll("_", " ");
+
+  const bidiClass = (bidiClasses.get(codePoint) ?? "-").replaceAll("_", " ");
 
   const codePointAsHexa = getCodePointAsHexa(codePoint);
   const codePointDescription = `U+${codePointAsHexa}`;
@@ -56,8 +71,8 @@ export default function CharacterInfo() {
     <div className="character-info">
       <h2>About the character</h2>
 
-      <div className="code-point-display">
-        <CodePoint codePoint={codePoint} />
+      <div className="character-info-codepoint">
+        <CodePointDisplay codePoints={[codePoint]} />
       </div>
 
       <h3>Character abstract name</h3>
@@ -65,6 +80,9 @@ export default function CharacterInfo() {
 
       <h3>General category</h3>
       <p>{characterCategory}</p>
+
+      <h3>Bidi class</h3>
+      <p>{bidiClass}</p>
 
       {ALL_ENCODINGS.map((encoding) => (
         <Activity

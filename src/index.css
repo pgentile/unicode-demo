@@ -182,10 +182,10 @@ a:visited {
 .character-info {
   padding: calc(var(--margin) * 0.75);
 
-    @media (max-width: 800px) {
-        min-width: 20rem;
-        max-width: 75vw;
-    }
+  @media (max-width: 800px) {
+    min-width: 20rem;
+    max-width: 75vw;
+  }
 
   @media (min-width: 800px) {
     min-width: 25rem;
@@ -199,6 +199,12 @@ a:visited {
 
   > * {
     align-self: center;
+  }
+
+  .character-info-codepoint {
+    padding-bottom: calc(var(--margin) * 0.75);
+
+    font-size: 1.5rem;
   }
 }
 
