@@ -41,6 +41,8 @@ h4,
 h5,
 h6,
 p,
+ul,
+ol,
 pre {
   margin: 0;
   margin-bottom: calc(var(--margin) * 0.75);
@@ -90,15 +92,27 @@ a:visited {
 
   .source-samples {
     padding-top: calc(var(--margin) * 0.75);
+
+    .please-try {
+      font-style: italic;
+    }
   }
 
   .samples {
-    .sample-value a {
-      text-decoration: none;
-    }
+    display: flex;
+    flex-wrap: wrap;
+    row-gap: calc(var(--margin) * 0.75 / 2);
+    column-gap: calc(var(--margin));
 
-    .sample-value:not(:last-child)::after {
-      content: ", ";
+    padding-left: 0;
+
+    .sample-value {
+      list-style-type: none;
+      padding-left: 0;
+
+      a {
+        text-decoration: none;
+      }
     }
   }
 }
