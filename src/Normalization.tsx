@@ -1,5 +1,5 @@
 import { type MouseEvent, useDeferredValue } from "react";
-import { useSource } from "./SourceContextBase.ts";
+import { useSource, useTextDirection } from "./SourceContextBase.ts";
 import type { NormalizationForm } from "./common.ts";
 import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 
@@ -26,8 +26,10 @@ export default function Normalization({ form }: NormalizationProps) {
     setSource(normalized);
   };
 
+  const [textDirection] = useTextDirection();
+
   return (
-    <section className="output">
+    <section className="output" dir={textDirection}>
       <h2 className="output-title">
         {form}
         <span className="output-detailed-description">

@@ -1,4 +1,8 @@
-import { useCurrentCodePointIndex, useSource } from "./SourceContextBase.ts";
+import {
+  useCurrentCodePointIndex,
+  useSource,
+  useTextDirection,
+} from "./SourceContextBase.ts";
 import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 import { countCodePoints } from "./codePoints.ts";
 import { useDeferredValue } from "react";
@@ -18,8 +22,10 @@ export default function OriginDisplay() {
 
   const onMouseOutOfCodePoint = () => clearCurrentCodePointIndex();
 
+  const [textDirection] = useTextDirection();
+
   return (
-    <section className="output">
+    <section className="output" dir={textDirection}>
       <h2 className="output-title">Origin</h2>
       <StringCodePointDisplay
         value={deferredSource}

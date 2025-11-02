@@ -1,5 +1,5 @@
-import { useSource } from "./SourceContextBase.ts";
-import { useId } from "react";
+import { useSource, useTextDirection } from "./SourceContextBase.ts";
+import { useId, type MouseEvent } from "react";
 
 export default function SourceForm() {
   const [source, setSource] = useSource();
@@ -9,13 +9,20 @@ export default function SourceForm() {
   };
 
   const sourceInputId = useId();
+  const [textDirection, toggleTextDirection] = useTextDirection();
 
+  const onToggleTextDirectionClick = (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    toggleTextDirection();
+  };
+
+  const toggleTextDirectionText = "Toggle text direction";
   return (
-    <form className="source-section">
+    <form className="source-section" dir={textDirection}>
       <h2>
         <label htmlFor={sourceInputId}>Source</label>
       </h2>
-      <p>
+      <p className="source-input-group">
         <input
           className="source-input"
           id={sourceInputId}
@@ -23,6 +30,13 @@ export default function SourceForm() {
           value={source}
           onChange={onSourceChange}
         />
+        <button
+          className="text-dir-button"
+          title={toggleTextDirectionText}
+          onClick={onToggleTextDirectionClick}
+        >
+          ⇋<span className="hidden"> {toggleTextDirectionText}</span>
+        </button>
       </p>
     </form>
   );

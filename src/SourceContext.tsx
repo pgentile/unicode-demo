@@ -21,7 +21,8 @@ type SourceAction =
   | { type: "toggleShowJsString" }
   | { type: "toggleShowNormalizationForms" }
   | { type: "displayInfoOfCodePoint"; codePoint: number }
-  | { type: "hideInfoOfCodePoint" };
+  | { type: "hideInfoOfCodePoint" }
+  | { type: "toggleTextDirection" };
 
 function reducer(state: SourceState, action: SourceAction): SourceState {
   switch (action.type) {
@@ -82,9 +83,13 @@ function reducer(state: SourceState, action: SourceAction): SourceState {
         ...state,
         infoOfCodePoint: action.codePoint,
       };
-    case "hideInfoOfCodePoint": {
+    case "hideInfoOfCodePoint":
       return { ...state, infoOfCodePoint: undefined };
-    }
+    case "toggleTextDirection":
+      return {
+        ...state,
+        textDirection: state.textDirection === "ltr" ? "rtl" : "ltr",
+      };
     default:
       return state;
   }
@@ -129,6 +134,10 @@ export default function SourceContext({ children }: SourceContextProps) {
     dispatch({ type: "hideInfoOfCodePoint" });
   };
 
+  const toggleTextDirection = () => {
+    dispatch({ type: "toggleTextDirection" });
+  };
+
   return (
     <SourceContextValue value={state}>
       <SourceContextActions
@@ -142,6 +151,7 @@ export default function SourceContext({ children }: SourceContextProps) {
           toggleShowNormalizationForms,
           displayInfoOfCodePoint,
           hideInfoOfCodePoint,
+          toggleTextDirection,
         }}
       >
         {children}

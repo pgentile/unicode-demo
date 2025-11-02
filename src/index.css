@@ -12,6 +12,8 @@
 
   --input-group-background-color: #4b4b4b;
   --input-group-color: white;
+  --input-group-link-color: var(--input-group-color);
+  --input-group-link-color-hover: #c3c3c3;
 
   --source-background-color: #4b4b4b;
   --source-color: var(--color);
@@ -77,18 +79,30 @@ a:visited {
   color: var(--input-group-color);
   padding: calc(var(--margin) * 0.75);
 
-  a {
-    color: var(--input-group-color);
-  }
-
   .source-section {
-    .source-input {
-      font-size: 2.5rem;
-      display: block;
-      width: 100%;
+    .source-input-group {
+      display: flex;
+      gap: calc(var(--margin) / 2);
+      align-items: center;
 
-      border: none;
-      padding: calc(var(--margin) / 2);
+      .source-input {
+        font-size: 2.5rem;
+        display: block;
+        width: 100%;
+
+        border: none;
+        padding: calc(var(--margin) / 2);
+      }
+
+      .text-dir-button {
+        all: unset;
+        cursor: pointer;
+        font-size: 1.5rem;
+
+        &:hover {
+          color: var(--input-group-link-color-hover);
+        }
+      }
     }
   }
 
@@ -114,6 +128,11 @@ a:visited {
 
       a {
         text-decoration: none;
+        color: var(--input-group-color);
+
+        &:hover {
+          color: var(--input-group-link-color-hover);
+        }
       }
     }
   }

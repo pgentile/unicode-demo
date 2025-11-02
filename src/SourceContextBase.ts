@@ -1,6 +1,8 @@
 import { createContext, useContext } from "react";
 import { ALL_ENCODINGS, type Encoding } from "./common.ts";
 
+export type TextDirection = "ltr" | "rtl";
+
 export interface SourceContextProps {
   source: string;
   currentCodePointIndex?: number;
@@ -11,6 +13,7 @@ export interface SourceContextProps {
     showNormalizationForms: boolean;
   };
   infoOfCodePoint?: number;
+  textDirection: TextDirection;
 }
 
 export const DEFAULT_SOURCE_PROPS: SourceContextProps = {
@@ -21,6 +24,7 @@ export const DEFAULT_SOURCE_PROPS: SourceContextProps = {
     showJsString: true,
     showNormalizationForms: true,
   },
+  textDirection: "ltr",
 };
 
 export const SourceContextValue = createContext(DEFAULT_SOURCE_PROPS);
@@ -35,6 +39,7 @@ export interface SourceContextActionsProps {
   toggleShowNormalizationForms: () => void;
   displayInfoOfCodePoint: (codePoint: number) => void;
   hideInfoOfCodePoint: () => void;
+  toggleTextDirection: () => void;
 }
 
 function doNothing() {}
@@ -49,6 +54,7 @@ export const SourceContextActions = createContext<SourceContextActionsProps>({
   toggleShowNormalizationForms: doNothing,
   displayInfoOfCodePoint: doNothing,
   hideInfoOfCodePoint: doNothing,
+  toggleTextDirection: doNothing,
 });
 
 export function useSource(): [string, SourceContextActionsProps["setSource"]] {
@@ -117,4 +123,13 @@ export function useInfoOfCodePoint(): [
   const { displayInfoOfCodePoint, hideInfoOfCodePoint } =
     useContext(SourceContextActions);
   return [infoOfCodePoint ?? null, displayInfoOfCodePoint, hideInfoOfCodePoint];
+}
+
+export function useTextDirection(): [
+  TextDirection,
+  SourceContextActionsProps["toggleTextDirection"],
+] {
+  const { textDirection } = useContext(SourceContextValue);
+  const { toggleTextDirection } = useContext(SourceContextActions);
+  return [textDirection, toggleTextDirection];
 }
