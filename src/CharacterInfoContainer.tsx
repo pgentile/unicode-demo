@@ -1,6 +1,7 @@
 import { Activity, lazy, type MouseEvent, Suspense } from "react";
 import { createPortal } from "react-dom";
-import { useInfoOfCodePoint } from "./SourceContextBase.ts";
+import { useInfoOfCodePoint, useTextDirection } from "./SourceContextBase.ts";
+import { classNames } from "./common.ts";
 
 const CharacterInfo = lazy(() => import("./CharacterInfo.tsx"));
 
@@ -22,8 +23,10 @@ function CharacterInfoInnerContainer() {
     hideInfoOfCodePoint();
   };
 
+  const [textDirection] = useTextDirection();
+
   return (
-    <aside className="character-info-container">
+    <aside className={classNames("character-info-container", textDirection)}>
       <button
         className="character-info-container-close"
         onClick={onCharacterInfoCloseClick}

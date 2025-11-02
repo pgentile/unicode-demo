@@ -182,6 +182,9 @@ a:visited {
 }
 
 .character-info-container {
+  --box-shadow-size: 5px;
+  --box-shadow-x: calc(-1 * var(--box-shadow-size));
+
   position: fixed;
   right: 0;
   top: 0;
@@ -194,7 +197,14 @@ a:visited {
   background-color: var(--char-info-background-color);
   color: var(--char-info-color);
 
-  box-shadow: rgba(0, 0, 0, 0.5) -5px 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.5) var(--box-shadow-x) 0 10px;
+
+  &.rtl {
+    --box-shadow-x: var(--box-shadow-size);
+
+    right: unset;
+    left: 0;
+  }
 
   .character-info-container-close {
     --box-size: 1.5rem;
