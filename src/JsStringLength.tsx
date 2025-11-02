@@ -1,8 +1,10 @@
 import { useSource } from "./SourceContextBase.ts";
+import { useDeferredValue } from "react";
 
 export default function JsStringLength() {
   const [source] = useSource();
-  const jsString = escapeJavaScriptString(source);
+  const deferredSource = useDeferredValue(source);
+  const jsString = escapeJavaScriptString(deferredSource);
 
   return (
     <section className="output">
@@ -16,8 +18,8 @@ export default function JsStringLength() {
           <code>String: length</code>
         </a>
       </h2>
-      <pre>
-        "{jsString}".length === {source.length}
+      <pre className="js-code">
+        "{jsString}".length === {deferredSource.length}
       </pre>
     </section>
   );

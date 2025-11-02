@@ -1,4 +1,4 @@
-import { type MouseEvent } from "react";
+import { type MouseEvent, useDeferredValue } from "react";
 import { useSource } from "./SourceContextBase.ts";
 import type { NormalizationForm } from "./common.ts";
 import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
@@ -16,7 +16,8 @@ const FORM_DESCRIPTIONS: Record<NormalizationForm, string> = {
 
 export default function Normalization({ form }: NormalizationProps) {
   const [source, setSource] = useSource();
-  const normalized = source.normalize(form);
+  const deferredSource = useDeferredValue(source);
+  const normalized = deferredSource.normalize(form);
 
   const onUseNormalizedAsSourceClick = (
     event: MouseEvent<HTMLAnchorElement>,

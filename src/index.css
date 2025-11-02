@@ -156,6 +156,10 @@ a:visited {
   }
 }
 
+.js-code {
+  overflow-x: auto;
+}
+
 .character-info-container {
   position: fixed;
   right: 0;
@@ -242,35 +246,35 @@ a:visited {
   gap: calc(var(--margin) / 2);
 
   overflow-x: auto;
-}
 
-.codepoint {
-  --inner-margin: calc(var(--margin) / 2.5);
+  .codepoint {
+    --inner-margin: calc(var(--margin) / 2.5);
 
-  padding: var(--inner-margin);
+    padding: var(--inner-margin);
 
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 
-  border: 1px dotted var(--color);
+    border: 1px dotted var(--color);
 
-  .codepoint-char {
-    padding-bottom: var(--inner-margin);
-  }
+    .codepoint-char {
+      padding-bottom: var(--inner-margin);
+    }
 
-  .codepoint-char,
-  .codepoint-value {
-    text-align: center;
-  }
+    .codepoint-char,
+    .codepoint-value {
+      text-align: center;
+    }
 
-  .codepoint-char-link {
-    color: var(--color);
-    text-decoration: none;
-  }
+    .codepoint-char-link {
+      color: var(--color);
+      text-decoration: none;
+    }
 
-  .codepoint-number {
-    font-family: monospace;
+    .codepoint-number {
+      font-family: monospace;
+    }
   }
 }
 

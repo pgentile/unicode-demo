@@ -7,11 +7,7 @@ import Normalization from "./Normalization.tsx";
 import EncodedBytes from "./EncodedBytes.tsx";
 import DemoControls from "./DemoControls.tsx";
 import { useDemoModeProps } from "./DemoModeContextBase.ts";
-import {
-  ALL_ENCODINGS,
-  ALL_NORMALIZATION_FORMS,
-  type NormalizationForm,
-} from "./common.ts";
+import { ALL_ENCODINGS, ALL_NORMALIZATION_FORMS } from "./common.ts";
 import CharacterInfoContainer from "./CharacterInfoContainer.tsx";
 
 export default function App() {
@@ -47,7 +43,7 @@ export default function App() {
 
           {showNormalizationForms &&
             ALL_NORMALIZATION_FORMS.map((form) => (
-              <Normalization key={form} form={form as NormalizationForm} />
+              <Normalization key={form} form={form} />
             ))}
         </div>
       </main>
