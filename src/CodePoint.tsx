@@ -1,5 +1,6 @@
-import CodePointLink from "./CodePointLink.tsx";
 import { getCodePointAsHexa } from "./codePoints.ts";
+import { useShowCodePoint } from "./CharacterContextBase.ts";
+import type { MouseEvent } from "react";
 
 export interface CodePointProps {
   codePoint: number;
@@ -19,5 +20,27 @@ export default function CodePoint({ codePoint }: CodePointProps) {
         <CodePointLink codePoint={codePoint} />
       </div>
     </div>
+  );
+}
+
+interface CodePointLinkProps {
+  codePoint: number;
+}
+
+function CodePointLink({ codePoint }: CodePointLinkProps) {
+  const showCodePoint = useShowCodePoint();
+
+  const codePointAsHexa = getCodePointAsHexa(codePoint);
+  const codePointDescription = `U+${codePointAsHexa}`;
+
+  const onShowCodePointClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault();
+    showCodePoint(codePoint);
+  };
+
+  return (
+    <a href="#" onClick={onShowCodePointClick}>
+      {codePointDescription}
+    </a>
   );
 }
