@@ -1,10 +1,11 @@
 import { Fragment, type MouseEvent, use } from "react";
-import { useCodePoint } from "./CharacterContextBase.ts";
 import { getCodePointAsHexa } from "./codePoints.ts";
-import { useSource } from "./SourceContextBase.ts";
+import {
+  useDemoEncodings,
+  useInfoOfCodePoint,
+  useSource,
+} from "./SourceContextBase.ts";
 import ByteSequence from "./ByteSequence.tsx";
-import { useDemoModeProps } from "./DemoModeContextBase.ts";
-import { ALL_ENCODINGS } from "./common.ts";
 import CodePointDisplay from "./CodePointDisplay.tsx";
 import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 
@@ -88,7 +89,8 @@ export default function CharacterInfo() {
   const uppercaseMapping = use(uppercaseMappingPromise);
   const mirroringGlyphs = use(mirroringGlyphsPromise);
 
-  const codePoint = useCodePoint() ?? 0;
+  const [infoOfCodePoint] = useInfoOfCodePoint();
+  const codePoint = infoOfCodePoint ?? 0;
   const [, setSource] = useSource();
 
   const onUseAsSourceClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -114,7 +116,7 @@ export default function CharacterInfo() {
 
   const mirroringGlyph = mirroringGlyphs.get(codePoint);
 
-  const { enabledEncodings } = useDemoModeProps();
+  const [enabledEncodings] = useDemoEncodings();
 
   return (
     <div className="character-info">
@@ -133,9 +135,7 @@ export default function CharacterInfo() {
       <h3>Bidi class</h3>
       <p>{bidiClass}</p>
 
-      {ALL_ENCODINGS.filter((encoding) =>
-        enabledEncodings.includes(encoding),
-      ).map((encoding) => (
+      {enabledEncodings.map((encoding) => (
         <Fragment key={encoding}>
           <h3>{encoding} encoding</h3>
           <ByteSequence codePoints={[codePoint]} encoding={encoding} />

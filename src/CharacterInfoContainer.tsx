@@ -1,28 +1,25 @@
 import { Activity, lazy, type MouseEvent, Suspense } from "react";
-import {
-  useCodePointDisplay,
-  useHideCharacterContext,
-} from "./CharacterContextBase.ts";
 import { createPortal } from "react-dom";
+import { useInfoOfCodePoint } from "./SourceContextBase.ts";
 
 const CharacterInfo = lazy(() => import("./CharacterInfo.tsx"));
 
 export default function CharacterInfoContainer() {
-  const displayCodePoint = useCodePointDisplay();
+  const [infoOfCodePoint] = useInfoOfCodePoint();
 
   return (
-    <Activity mode={displayCodePoint ? "visible" : "hidden"}>
+    <Activity mode={typeof infoOfCodePoint === "number" ? "visible" : "hidden"}>
       {createPortal(<CharacterInfoInnerContainer />, document.body)}
     </Activity>
   );
 }
 
 function CharacterInfoInnerContainer() {
-  const hideCharacterContext = useHideCharacterContext();
+  const [, , hideInfoOfCodePoint] = useInfoOfCodePoint();
 
   const onCharacterInfoCloseClick = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    hideCharacterContext();
+    hideInfoOfCodePoint();
   };
 
   return (

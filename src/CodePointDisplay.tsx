@@ -1,7 +1,7 @@
 import { getCodePointAsHexa } from "./codePoints.ts";
-import { useShowCodePoint } from "./CharacterContextBase.ts";
 import type { MouseEvent } from "react";
 import { classNames } from "./common.ts";
+import { useInfoOfCodePoint } from "./SourceContextBase.ts";
 
 export interface CodePointDisplayProps {
   codePoints: number[];
@@ -69,14 +69,14 @@ interface CodePointLinkProps {
 }
 
 function CodePointLink({ codePoint }: CodePointLinkProps) {
-  const showCodePoint = useShowCodePoint();
+  const [, displayInfoOfCodePoint] = useInfoOfCodePoint();
 
   const codePointAsHexa = getCodePointAsHexa(codePoint);
   const codePointDescription = `U+${codePointAsHexa}`;
 
   const onShowCodePointClick = (event: MouseEvent<HTMLAnchorElement>) => {
     event.preventDefault();
-    showCodePoint(codePoint);
+    displayInfoOfCodePoint(codePoint);
   };
 
   return (

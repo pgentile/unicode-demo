@@ -1,17 +1,18 @@
-import { useDemoModeActions, useDemoModeProps } from "./DemoModeContextBase.ts";
 import { ALL_ENCODINGS } from "./common.ts";
 import { Fragment } from "react";
+import {
+  useDemoEncodings,
+  useDemoShowJsString,
+  useDemoShowNormalizationForms,
+  useDemoShowOrigin,
+} from "./SourceContextBase.ts";
 
 export default function DemoControls() {
-  const { enabledEncodings, showJsString, showNormalizationForms, showOrigin } =
-    useDemoModeProps();
-
-  const {
-    toggleEncoding,
-    toggleJsString,
-    toggleNormalizationForms,
-    toggleOrigin,
-  } = useDemoModeActions();
+  const [enabledEncodings, toggleEncoding] = useDemoEncodings();
+  const [showJsString, toggleJsString] = useDemoShowJsString();
+  const [showNormalizationForms, toggleNormalizationForms] =
+    useDemoShowNormalizationForms();
+  const [showOrigin, toggleOrigin] = useDemoShowOrigin();
 
   return (
     <section className="demo-controls">

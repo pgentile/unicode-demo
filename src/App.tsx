@@ -6,13 +6,20 @@ import JsStringLength from "./JsStringLength.tsx";
 import Normalization from "./Normalization.tsx";
 import EncodedBytes from "./EncodedBytes.tsx";
 import DemoControls from "./DemoControls.tsx";
-import { useDemoModeProps } from "./DemoModeContextBase.ts";
-import { ALL_ENCODINGS, ALL_NORMALIZATION_FORMS } from "./common.ts";
+import { ALL_NORMALIZATION_FORMS } from "./common.ts";
 import CharacterInfoContainer from "./CharacterInfoContainer.tsx";
+import {
+  useDemoEncodings,
+  useDemoShowJsString,
+  useDemoShowNormalizationForms,
+  useDemoShowOrigin,
+} from "./SourceContextBase.ts";
 
 export default function App() {
-  const { enabledEncodings, showJsString, showNormalizationForms, showOrigin } =
-    useDemoModeProps();
+  const [enabledEncodings] = useDemoEncodings();
+  const [showOrigin] = useDemoShowOrigin();
+  const [showJsString] = useDemoShowJsString();
+  const [showNormalizationForms] = useDemoShowNormalizationForms();
 
   return (
     <>
@@ -31,9 +38,7 @@ export default function App() {
           {showOrigin && <OriginDisplay />}
           {showJsString && <JsStringLength />}
 
-          {ALL_ENCODINGS.filter((encoding) =>
-            enabledEncodings.includes(encoding),
-          ).map((encoding) => (
+          {enabledEncodings.map((encoding) => (
             <Fragment key={encoding}>
               <EncodedBytes key={encoding} encoding={encoding} />
             </Fragment>
