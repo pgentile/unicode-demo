@@ -16,6 +16,8 @@
   --source-background-color: #4b4b4b;
   --source-color: var(--color);
 
+  --focused-color: #fff6bc;
+
   font-size: 1.3em;
   font-family:
     "Source Sans Pro", Roboto, "San Francisco", "Segoe UI", sans-serif;
@@ -258,6 +260,10 @@ a:visited {
 
     border: 1px dotted var(--color);
 
+    &.focused {
+      background-color: var(--focused-color);
+    }
+
     .codepoint-char {
       padding-bottom: var(--inner-margin);
     }
@@ -288,6 +294,10 @@ a:visited {
   .unicode-bytes {
     border: 1px dotted var(--color);
     padding: calc(var(--margin) / 4);
+
+    &.focused {
+      background-color: var(--focused-color);
+    }
   }
 }
 

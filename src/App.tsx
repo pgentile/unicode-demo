@@ -27,8 +27,6 @@ export default function App() {
         </div>
         <DemoControls />
 
-        <CharacterInfoContainer />
-
         <div className="output-group">
           {showOrigin && <OriginDisplay />}
           {showJsString && <JsStringLength />}
@@ -47,6 +45,8 @@ export default function App() {
             ))}
         </div>
       </main>
+
+      <CharacterInfoContainer />
     </>
   );
 }

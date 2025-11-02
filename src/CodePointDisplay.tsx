@@ -1,15 +1,18 @@
 import { getCodePointAsHexa } from "./codePoints.ts";
 import { useShowCodePoint } from "./CharacterContextBase.ts";
 import type { MouseEvent } from "react";
+import { classNames } from "./common.ts";
 
 export interface CodePointDisplayProps {
   codePoints: number[];
+  focusAtIndex?: number;
   onMouseOverCodePoint?: (_: { index: number; codePoint: number }) => void;
   onMouseOutOfCodePoint?: () => void;
 }
 
 export default function CodePointDisplay({
   codePoints,
+  focusAtIndex,
   onMouseOverCodePoint,
   onMouseOutOfCodePoint,
 }: CodePointDisplayProps) {
@@ -19,6 +22,7 @@ export default function CodePointDisplay({
         <CodePoint
           key={index}
           codePoint={codePoint}
+          focused={index === focusAtIndex}
           onMouseOver={() => onMouseOverCodePoint?.({ index, codePoint })}
           onMouseOut={() => onMouseOutOfCodePoint?.()}
         />
@@ -29,17 +33,23 @@ export default function CodePointDisplay({
 
 interface CodePointProps {
   codePoint: number;
+  focused?: boolean;
   onMouseOver: () => void;
   onMouseOut: () => void;
 }
 
-function CodePoint({ codePoint, onMouseOver, onMouseOut }: CodePointProps) {
+function CodePoint({
+  codePoint,
+  focused,
+  onMouseOver,
+  onMouseOut,
+}: CodePointProps) {
   const codePointAsHexa = getCodePointAsHexa(codePoint);
   const codePointAsHtmlEntity = `&#x${codePointAsHexa};`;
 
   return (
     <div
-      className="codepoint"
+      className={classNames("codepoint", focused && "focused")}
       onMouseOver={() => onMouseOver()}
       onMouseOut={() => onMouseOut()}
     >

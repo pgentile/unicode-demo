@@ -5,3 +5,7 @@ export type Encoding = (typeof ALL_ENCODINGS)[number];
 export const ALL_NORMALIZATION_FORMS = ["NFC", "NFD", "NFKC", "NFKD"] as const;
 
 export type NormalizationForm = (typeof ALL_NORMALIZATION_FORMS)[number];
+
+export function classNames(...classes: (string | false | null | undefined)[]) {
+  return classes.filter((cls) => !!cls).join(" ");
+}

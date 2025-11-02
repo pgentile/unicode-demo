@@ -1,13 +1,45 @@
 import { createContext, useContext } from "react";
 
-export const SourceContextValue = createContext<string>("");
+export interface SourceContextProps {
+  source: string;
+  currentCodePointIndex?: number;
+}
 
-export type SetSourceFunction = (newSource: string) => void;
+export const SourceContextValue = createContext<SourceContextProps>({
+  source: "",
+});
 
-export const SourceContextActions = createContext<SetSourceFunction>(() => {});
+export interface SourceContextActionsProps {
+  setSource: (newSource: string) => void;
+  defineCurrentCodePointIndex: (index: number) => void;
+  clearCurrentCodePointIndex: () => void;
+}
 
-export function useSource(): [string, SetSourceFunction] {
-  const source = useContext(SourceContextValue);
-  const setSource = useContext(SourceContextActions);
+function doNothing() {}
+
+export const SourceContextActions = createContext<SourceContextActionsProps>({
+  setSource: doNothing,
+  defineCurrentCodePointIndex: doNothing,
+  clearCurrentCodePointIndex: doNothing,
+});
+
+export function useSource(): [string, SourceContextActionsProps["setSource"]] {
+  const { source } = useContext(SourceContextValue);
+  const { setSource } = useContext(SourceContextActions);
   return [source, setSource];
+}
+
+export function useCurrentCodePointIndex(): [
+  number | null,
+  SourceContextActionsProps["defineCurrentCodePointIndex"],
+  SourceContextActionsProps["clearCurrentCodePointIndex"],
+] {
+  const { currentCodePointIndex } = useContext(SourceContextValue);
+  const { defineCurrentCodePointIndex, clearCurrentCodePointIndex } =
+    useContext(SourceContextActions);
+  return [
+    currentCodePointIndex ?? null,
+    defineCurrentCodePointIndex,
+    clearCurrentCodePointIndex,
+  ];
 }

@@ -1,14 +1,20 @@
 import { encodeTo } from "./codePoints.ts";
-import type { Encoding } from "./common.ts";
+import { classNames, type Encoding } from "./common.ts";
 
 export interface ByteSequenceProps {
   codePoints: number[];
   encoding: Encoding;
+  focusAtIndex?: number;
+  onMouseOverCodePoints?: (_: { index: number; codeUnits: number[] }) => void;
+  onMouseOutOfCodePoints?: () => void;
 }
 
 export default function ByteSequence({
   codePoints,
   encoding,
+  focusAtIndex,
+  onMouseOverCodePoints,
+  onMouseOutOfCodePoints,
 }: ByteSequenceProps) {
   const sequence = encodeTo(codePoints, encoding);
 
@@ -16,9 +22,17 @@ export default function ByteSequence({
 
   return (
     <div className="unicode-sequence">
-      {sequence.map((bytes, index) => (
-        <span key={index} className="unicode-bytes">
-          {bytesToHex(bytes, padding)}
+      {sequence.map((codeUnits, index) => (
+        <span
+          key={index}
+          className={classNames(
+            "unicode-bytes",
+            focusAtIndex === index && "focused",
+          )}
+          onMouseOver={() => onMouseOverCodePoints?.({ index, codeUnits })}
+          onMouseOut={() => onMouseOutOfCodePoints?.()}
+        >
+          {bytesToHex(codeUnits, padding)}
         </span>
       ))}
     </div>
