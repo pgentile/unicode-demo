@@ -9,6 +9,8 @@ updates:
         patterns:
           - "eslint"
           - "eslint-*"
+          - "*-eslint"
+          - "@eslint/*"
       react:
         patterns:
           - "react"
