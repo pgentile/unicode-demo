@@ -1,15 +1,16 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import react, { reactCompilerPreset } from "@vitejs/plugin-react";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
+import babel from "@rolldown/plugin-babel";
 
 // https://vite.dev/config/
 export default defineConfig({
   base: "",
   plugins: [
-    react({
-      babel: {
-        plugins: [["babel-plugin-react-compiler"]],
-      },
+    react(),
+    // @ts-expect-error TS2345
+    babel({
+      presets: [reactCompilerPreset()],
     }),
     nodePolyfills(),
   ],
