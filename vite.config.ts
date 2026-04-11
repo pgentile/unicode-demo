@@ -8,7 +8,6 @@ export default defineConfig({
   base: "",
   plugins: [
     react(),
-    // @ts-expect-error TS2345
     babel({
       presets: [reactCompilerPreset()],
     }),
