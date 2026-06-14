@@ -1,0 +1,49 @@
+name: Dedupe PNPM dependencies
+
+on:
+  schedule:
+    - cron: "0 8 * * 0" # Every Sunday at 08:00 UTC
+  workflow_dispatch: {}
+
+jobs:
+  dedupe:
+    name: Dedupe
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6
+        with:
+          version: "11"
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "lts/*"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Dedupe dependencies
+        run: pnpm dedupe
+
+      - name: Create pull request
+        uses: peter-evans/create-pull-request@v7
+        with:
+          commit-message: "chore(deps): dedupe pnpm dependencies"
+          branch: pnpm_dedupe
+          delete-branch: true
+          title: "chore(deps): dedupe pnpm dependencies"
+          body: |
+            Automated deduplication of PNPM dependencies via `pnpm dedupe`.
+
+            This PR was created by the scheduled [Dedupe PNPM dependencies](${{ github.server_url }}/${{ github.repository }}/actions/workflows/pnpm-dedupe.yml) workflow.
+          labels: dependencies
