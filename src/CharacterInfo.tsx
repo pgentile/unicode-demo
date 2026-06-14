@@ -45,9 +45,8 @@ const bidiClassesPromise: Promise<Map<number, string>> = new Promise(
 const lowercaseMappingPromise: Promise<Map<number, number>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import(
-        "@unicode/unicode-17.0.0/Simple_Case_Mapping/Lowercase/code-points"
-      );
+      const module =
+        await import("@unicode/unicode-17.0.0/Simple_Case_Mapping/Lowercase/code-points");
       return module.default;
     }
 
@@ -58,9 +57,8 @@ const lowercaseMappingPromise: Promise<Map<number, number>> = new Promise(
 const uppercaseMappingPromise: Promise<Map<number, number>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import(
-        "@unicode/unicode-17.0.0/Simple_Case_Mapping/Uppercase/code-points"
-      );
+      const module =
+        await import("@unicode/unicode-17.0.0/Simple_Case_Mapping/Uppercase/code-points");
       return module.default;
     }
 
@@ -71,9 +69,8 @@ const uppercaseMappingPromise: Promise<Map<number, number>> = new Promise(
 const mirroringGlyphsPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import(
-        "@unicode/unicode-17.0.0/Bidi_Mirroring_Glyph"
-      );
+      const module =
+        await import("@unicode/unicode-17.0.0/Bidi_Mirroring_Glyph");
       return module.default;
     }
 

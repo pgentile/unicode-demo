@@ -3,8 +3,10 @@ import CodePointDisplay, {
   type CodePointDisplayProps,
 } from "./CodePointDisplay.tsx";
 
-export interface StringCodePointDisplayProps
-  extends Omit<CodePointDisplayProps, "codePoints"> {
+export interface StringCodePointDisplayProps extends Omit<
+  CodePointDisplayProps,
+  "codePoints"
+> {
   value: string;
 }
 
