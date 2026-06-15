@@ -36,7 +36,7 @@ jobs:
         run: pnpm dedupe
 
       - name: Create pull request
-        uses: peter-evans/create-pull-request@v7
+        uses: peter-evans/create-pull-request@v8
         with:
           commit-message: "chore(deps): dedupe pnpm dependencies"
           branch: pnpm_dedupe
