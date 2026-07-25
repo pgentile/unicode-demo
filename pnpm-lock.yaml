@@ -34,8 +34,8 @@ importers:
         specifier: ^19.2.3
         version: 19.2.3(@types/react@19.2.17)
       '@vitejs/plugin-react':
-        specifier: ^6.0.3
-        version: 6.0.3(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.0)(rolldown@1.1.5)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2)))(babel-plugin-react-compiler@19.1.0-rc.3)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2))
+        specifier: ^6.0.4
+        version: 6.0.4(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.0)(rolldown@1.1.5)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2)))(babel-plugin-react-compiler@19.1.0-rc.3)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2))
       babel-plugin-react-compiler:
         specifier: 19.1.0-rc.3
         version: 19.1.0-rc.3
@@ -606,8 +606,8 @@ packages:
   '@unicode/unicode-17.0.0@1.6.17':
     resolution: {integrity: sha512-TcBN39y5g7rmQbjnIDsW+4XlEXk6BnJMlhGyUHqUljp00affwlSLv5v7nB37pbdD/ks1BpptvILVQRMp34wPPw==}
 
-  '@vitejs/plugin-react@6.0.3':
-    resolution: {integrity: sha512-vmFvco5/QuC2f9Oj+wTk0+9XeDFkHxSamwZKYc7MxYwKICfvUvlMhqKI0VuICPltGqh1neqBKDvO4kes1ya8vg==}
+  '@vitejs/plugin-react@6.0.4':
+    resolution: {integrity: sha512-XcCQz0TBpBgljhj0gMuuDj49i6Ytqh5q1osT/Gp5uAVJUCTWxyskk/l1jwYYiu2xcNHHipdMz40EGfM1VdamVg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
       '@rolldown/plugin-babel': ^0.1.7 || ^0.2.0
@@ -2063,7 +2063,7 @@ snapshots:
 
   '@unicode/unicode-17.0.0@1.6.17': {}
 
-  '@vitejs/plugin-react@6.0.3(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.0)(rolldown@1.1.5)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2)))(babel-plugin-react-compiler@19.1.0-rc.3)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2))':
+  '@vitejs/plugin-react@6.0.4(@rolldown/plugin-babel@0.2.3(@babel/core@7.29.0)(rolldown@1.1.5)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2)))(babel-plugin-react-compiler@19.1.0-rc.3)(vite@8.1.5(@types/node@25.6.0)(esbuild@0.27.2))':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
       vite: 8.1.5(@types/node@25.6.0)(esbuild@0.27.2)
