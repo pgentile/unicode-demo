@@ -7,7 +7,7 @@ export default defineConfig({
   base: "",
   plugins: [
     react({
-      compiler: true
+      compiler: true,
     }),
     nodePolyfills(),
   ],
