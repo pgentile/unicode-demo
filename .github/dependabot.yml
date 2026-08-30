@@ -16,6 +16,7 @@ updates:
           - "react"
           - "react-*"
           - "@types/react"
+          - "@types/react-*"
       vite:
         patterns:
           - "vite"
