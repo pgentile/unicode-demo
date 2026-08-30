@@ -12,7 +12,7 @@ import StringCodePointDisplay from "./StringCodePointDisplay.tsx";
 const characterNamesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import("@unicode/unicode-17.0.0/Names");
+      const module = await import("@unicode/unicode-18.0.0/Names");
       return module.default;
     }
 
@@ -23,7 +23,7 @@ const characterNamesPromise: Promise<Map<number, string>> = new Promise(
 const characterCategoriesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import("@unicode/unicode-17.0.0/General_Category");
+      const module = await import("@unicode/unicode-18.0.0/General_Category");
       return module.default;
     }
 
@@ -34,7 +34,7 @@ const characterCategoriesPromise: Promise<Map<number, string>> = new Promise(
 const bidiClassesPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
-      const module = await import("@unicode/unicode-17.0.0/Bidi_Class");
+      const module = await import("@unicode/unicode-18.0.0/Bidi_Class");
       return module.default;
     }
 
@@ -46,7 +46,7 @@ const lowercaseMappingPromise: Promise<Map<number, number>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
       const module =
-        await import("@unicode/unicode-17.0.0/Simple_Case_Mapping/Lowercase/code-points");
+        await import("@unicode/unicode-18.0.0/Simple_Case_Mapping/Lowercase/code-points");
       return module.default;
     }
 
@@ -58,7 +58,7 @@ const uppercaseMappingPromise: Promise<Map<number, number>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
       const module =
-        await import("@unicode/unicode-17.0.0/Simple_Case_Mapping/Uppercase/code-points");
+        await import("@unicode/unicode-18.0.0/Simple_Case_Mapping/Uppercase/code-points");
       return module.default;
     }
 
@@ -70,7 +70,7 @@ const mirroringGlyphsPromise: Promise<Map<number, string>> = new Promise(
   (resolve, reject) => {
     async function loadModule() {
       const module =
-        await import("@unicode/unicode-17.0.0/Bidi_Mirroring_Glyph");
+        await import("@unicode/unicode-18.0.0/Bidi_Mirroring_Glyph");
       return module.default;
     }
 
